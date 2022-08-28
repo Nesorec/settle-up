@@ -1,0 +1,72 @@
+<h1 mat-dialog-title>New expense</h1>
+
+<div class="row">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label for="description">Expense's description</mat-label>
+    <textarea
+      id="description"
+      [formControl]="description"
+      matInput
+      placeholder="Ex. Beers at beach bar"
+    >
+    </textarea>
+  </mat-form-field>
+</div>
+
+<div>
+<label id="example-radio-group-label">Who paid?</label>
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="payingUser">
+  <mat-radio-button class="example-radio-button" *ngFor="let user of users" [value]="user">
+    {{user.name}}
+  </mat-radio-button>
+</mat-radio-group>
+</div>
+
+<div class="row">
+  <mat-form-field appearance="fill">
+    <mat-label for="pricePaid">Ammount Paid</mat-label>
+    <input
+      id="pricePaid"
+      [formControl]="pricePaid"
+      matInput
+      placeholder=""
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+    Who did he pay for?
+    <div>
+                                    <!-- [indeterminate]="someComplete()" -->
+        <section class="example-section">
+            <span class="example-list-section">
+              <mat-checkbox class="example-margin"
+                            [checked]="allComplete"
+                            color="warn"
+
+                            (change)="setAll($event.checked)">
+                Everybody
+              </mat-checkbox>
+            </span>
+            <span class="example-list-section">
+              <ul>
+                <li *ngFor="let user of users">
+                  <mat-checkbox [(ngModel)]="user.participatesInCurrentExpense"
+                                color="primary"
+                                (ngModelChange)="updateAllComplete()">
+                    {{user.name}}
+                  </mat-checkbox>
+                </li>
+              </ul>
+            </span>
+          </section>
+
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-raised-button color="primary" (click)="confirm()">Add expense</button>
+</div>

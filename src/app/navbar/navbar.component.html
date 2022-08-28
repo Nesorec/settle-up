@@ -1,0 +1,47 @@
+<mat-toolbar color="primary" class="mb-4">
+  <span *ngIf="!showForm">{{ eventName.value }}</span>
+  <span class="example-spacer"></span>
+
+  <button *ngIf="!showForm" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/manage-users">
+      <mat-icon>build</mat-icon>
+      <span>Manage Users</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<div *ngIf="showForm">
+  <h1 class="ml-4 mt-2" style="color: rgb(0, 89, 255)">
+    Enter the event name in the input below and let's begin!!
+  </h1>
+
+  <form class="example-form" (ngSubmit)="onSubmit()" #Eventform="ngForm">
+    <div class="container">
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label for="eventName">Event's name</mat-label>
+          <input
+            id="eventName"
+            [formControl]="eventName"
+            matInput
+            placeholder=""
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!Eventform.valid"
+        >
+          Start Event
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

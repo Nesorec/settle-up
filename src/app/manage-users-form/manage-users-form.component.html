@@ -1,0 +1,32 @@
+<div id="e1">
+    <form [formGroup]="manageUsersForm" (ngSubmit)="onSubmit()">
+    
+    
+    <div formArrayName="currentUsers">
+        <div *ngFor="let user of currentUsers.controls; let i=index">
+            <mat-form-field appearance="fill">
+            <mat-label attr.for="user-{{i}}">User:</mat-label>
+            <input matInput type="text"  id="user-{{i}}" [formControlName]="i">
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div formArrayName="newUsers">
+        <div *ngFor="let newUser of newUsers.controls; let i=index">
+            <mat-form-field appearance="fill">
+            <mat-label attr.for="newUser-{{i}}">User:</mat-label>
+            <input matInput type="text"  id="newUser-{{i}}" [formControlName]="i">
+            </mat-form-field>
+        </div>
+
+        <button mat-button color="primary" type="button" (click)="addNewUser()" class="mb-4">
+            Add another User
+            <mat-icon>add_circle</mat-icon>
+        </button>
+    </div>
+
+    <button mat-button color="primary" type="submit" [disabled]="!manageUsersForm.valid">
+         Submit <mat-icon>done</mat-icon></button>
+    </form>
+</div>
